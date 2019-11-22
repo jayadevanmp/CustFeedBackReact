@@ -15,6 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -46,6 +47,15 @@ export class PreSalesFeedbackForm extends Component {
         [e.target.name]: e.target.value
     });
     };
+    async tempSubmit() {
+
+        //e.preventDefault();
+        const response = await fetch("http://184.172.229.199:31617/sample/v1/feedback/1",
+           // {mode:"no-cors",headers:{"Content-Type":"application/json"}} 
+            );
+        const data = await response.json();
+        console.log(data);
+       }
     onSubmit = async e => {
         e.preventDefault();
         alert(JSON.stringify(this.state));
@@ -153,6 +163,12 @@ export class PreSalesFeedbackForm extends Component {
                         variant="contained"
                         onClick={this.onSubmit}
                         >Submit
+                    </Button>
+                    <Button 
+                        color="secondary"
+                        variant="contained"
+                        onClick={this.tempSubmit}
+                        >Temp
                     </Button>
                 </React.Fragment>
             </MuiThemeProvider>
